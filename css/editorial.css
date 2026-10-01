@@ -1,0 +1,279 @@
+/* ==========================================================================
+   EDITORIAL — premium card surfaces (CC.EditorialCard / CC.EditorialCardGrid)
+   --------------------------------------------------------------------------
+   Loaded after site.css on pages that use the editorial system. Extends the
+   existing token set rather than replacing it: same teal/cream/peach palette,
+   same fonts, same easing. No new hues.
+
+   Animation is transform/opacity only, so it stays on the compositor:
+     enter  opacity 0 -> 1, translateY 30px -> 0   640ms  (scroll reveal)
+     hover  translateY -8px, rotation -> ~0, scale 1.02   200ms  (micro)
+   ========================================================================== */
+
+:root {
+  --radius-xl: 20px;
+  --ecard-shadow: 0 18px 40px -22px rgba(13, 115, 119, 0.3), 0 2px 8px rgba(0, 0, 0, 0.04);
+  --ecard-shadow-hover: 0 30px 60px -26px rgba(13, 115, 119, 0.38), 0 4px 12px rgba(0, 0, 0, 0.06);
+  --ecard-reveal: 640ms;
+  --ecard-micro: 200ms;
+  --ecard-stagger: 90ms;
+}
+
+/* ---------- grid ---------- */
+
+.ecard-grid {
+  display: grid;
+  gap: clamp(18px, 2.6vw, 30px);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 620px) {
+  .ecard-grid--2,
+  .ecard-grid--3,
+  .ecard-grid--4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 900px) {
+  .ecard-grid--3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  /* 4-up steps through 3 first. Going straight from 2 to 4 here gave 187px
+     cards at 900px and 234px at 1100px — too narrow for a title plus copy. */
+  .ecard-grid--4 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  /* Layered, deliberately uneven baseline — the asymmetry of the reference.
+     Uses margin, not transform, so it cannot fight the reveal or the hover.
+
+     Offsets push the OUTER cards down rather than pulling the middle one up:
+     a negative margin here made card 2 hang 22px above the grid's own box,
+     where it could collide with whatever sits above the section. */
+  .ecard-grid--3 > .ecard:nth-child(3n + 1) {
+    margin-top: 22px;
+  }
+
+  .ecard-grid--3 > .ecard:nth-child(3n + 3) {
+    margin-top: 36px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .ecard-grid--4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* ---------- reveal layer (outer) ---------- */
+
+.ecard {
+  opacity: 1;
+  transform: none;
+  transition: opacity var(--ecard-reveal) var(--ease-out), transform var(--ecard-reveal) var(--ease-out);
+  transition-delay: calc(var(--i, 0) * var(--ecard-stagger));
+}
+
+/* Armed by JS (data-reveal) and released when the observer adds .is-in.
+   Scoped to :not(.is-in) so a card is never left invisible if JS never runs. */
+.ecard-grid[data-reveal]:not(.is-in) > .ecard,
+.ecard[data-reveal]:not(.is-in) {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+/* ---------- surface (inner) ---------- */
+
+.ecard-inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  border-radius: var(--radius-xl);
+  background: var(--paper);
+  box-shadow: var(--ecard-shadow);
+  color: inherit;
+  text-decoration: none;
+  /* Single source of truth for the resting transform. Breakpoints and
+     reduced-motion redefine THIS rather than re-stating a rotate(), which
+     is how a later block previously re-applied the tilt on phones. */
+  --ecard-rest: rotate(var(--ecard-rot, 0deg));
+  transform: var(--ecard-rest);
+  transition: transform var(--ecard-micro) var(--ease), box-shadow var(--ecard-micro) var(--ease);
+}
+
+/* Hover/focus straighten the card most of the way toward 0 rather than
+   snapping it flat — the tilt stays legible while the card lifts.
+
+   Scoped to a.ecard-inner: a card without an href is not clickable, so
+   lifting it on hover would promise an interaction that does not exist.
+   Gated on (hover: hover) so touch devices never enter a hover state at
+   all — that also removes any need to undo the lift further down. */
+@media (hover: hover) {
+  a.ecard-inner:hover {
+    transform: rotate(calc(var(--ecard-rot, 0deg) * 0.25)) translateY(-8px) scale(1.02);
+    box-shadow: var(--ecard-shadow-hover);
+  }
+}
+
+/* Keyboard focus is capability-independent, so it is not gated above. */
+.ecard-inner:focus-visible {
+  transform: rotate(calc(var(--ecard-rot, 0deg) * 0.25)) translateY(-8px) scale(1.02);
+  box-shadow: var(--ecard-shadow-hover);
+  outline: 2px solid var(--teal);
+  outline-offset: 3px;
+}
+
+/* ---------- variants ---------- */
+
+.ecard--cream .ecard-inner {
+  background: var(--cream);
+}
+
+.ecard--tint .ecard-inner {
+  background: linear-gradient(170deg, var(--teal-tint) 0%, var(--paper) 62%);
+}
+
+.ecard--solid .ecard-inner {
+  background: linear-gradient(165deg, var(--teal) 0%, var(--teal-deep) 100%);
+}
+
+.ecard--solid .ecard-eyebrow {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.ecard--solid .ecard-title {
+  color: #fff;
+}
+
+.ecard--solid .ecard-desc {
+  color: rgba(255, 255, 255, 0.86);
+}
+
+/* ---------- typography ---------- */
+
+.ecard-body {
+  padding: clamp(22px, 3vw, 32px) clamp(22px, 3vw, 32px) clamp(16px, 2vw, 22px);
+}
+
+/* Fallback glyph for cards with no photography. Deliberately restrained —
+   a quiet mark above the eyebrow, not a badge competing with the title. */
+.ecard-icon {
+  display: block;
+  margin-bottom: clamp(12px, 1.6vw, 18px);
+  color: var(--teal);
+  opacity: 0.85;
+}
+
+.ecard-icon .i {
+  width: 24px;
+  height: 24px;
+}
+
+.ecard--solid .ecard-icon {
+  color: #fff;
+  opacity: 0.9;
+}
+
+.ecard-eyebrow {
+  margin-bottom: clamp(10px, 1.4vw, 16px);
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--slate);
+}
+
+.ecard-title {
+  font-family: var(--font-head);
+  font-size: clamp(22px, 2.6vw, 28px);
+  font-weight: 600;
+  line-height: 1.16;
+  letter-spacing: -0.015em;
+  color: var(--teal);
+  text-wrap: balance;
+}
+
+.ecard-desc {
+  margin-top: 10px;
+  max-width: 42ch;
+  font-size: 15px;
+  line-height: 1.62;
+  color: var(--slate);
+}
+
+/* ---------- media ---------- */
+
+.ecard-media {
+  position: relative;
+  margin-top: auto;
+  height: clamp(130px, 17vw, 196px);
+  /* Fades the image's top edge into the card instead of painting a gradient
+     in the surface colour — so it works on every variant, including solid. */
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 46%);
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 46%);
+}
+
+.ecard-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* imagePosition: 'top' — media comes first in the DOM, so flip the fade to
+   melt into the copy below it and drop the push-to-bottom margin. */
+.ecard-inner > .ecard-media:first-child {
+  margin-top: 0;
+  -webkit-mask-image: linear-gradient(to top, transparent 0%, #000 46%);
+  mask-image: linear-gradient(to top, transparent 0%, #000 46%);
+}
+
+/* ---------- responsive: rotation is a desktop-only flourish ---------- */
+
+@media (max-width: 899px) {
+  /* Rotation is a desktop flourish. Redefining the rest state (rather than
+     the transform) means every later rule that returns to rest — including
+     the reduced-motion block — stays flat here too. */
+  .ecard-inner {
+    --ecard-rest: none;
+  }
+
+  a.ecard-inner:hover,
+  .ecard-inner:focus-visible {
+    transform: translateY(-6px) scale(1.01);
+  }
+
+  .ecard-grid--3 > .ecard:nth-child(3n + 1),
+  .ecard-grid--3 > .ecard:nth-child(3n + 3) {
+    margin-top: 0;
+  }
+}
+
+/* ---------- reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .ecard,
+  .ecard-inner {
+    transition: none;
+  }
+
+  /* Never withhold content from someone who opted out of animation */
+  .ecard-grid[data-reveal]:not(.is-in) > .ecard,
+  .ecard[data-reveal]:not(.is-in) {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* The tilt is layout, not motion, so it stays — only movement is dropped.
+     Shadow still deepens, so hover keeps a visible response. Returning to
+     --ecard-rest (not a literal rotate) keeps phones flat here. */
+  a.ecard-inner:hover,
+  .ecard-inner:focus-visible {
+    transform: var(--ecard-rest);
+  }
+}

@@ -1,0 +1,499 @@
+/* ==========================================================================
+   PROCESS DIAGRAMS  (CC.ProcessFlow / CC.RequirementMap)
+   --------------------------------------------------------------------------
+   Two shapes, chosen by whether the content is genuinely ordered:
+
+   ProcessFlow      numbered timeline, line fills as you scroll. Sequences only.
+   RequirementMap   unnumbered parts converging on one outcome. For things
+                    assessed together, where numbering would imply an order
+                    that does not exist (US/UK: academics, testing, essays,
+                    references are weighed as a set, not worked through 1-5).
+
+   Loaded after site.css on the process pages. Same tokens, same palette.
+   ========================================================================== */
+
+/* ---------- ProcessFlow ---------- */
+
+.pflow {
+  position: relative;
+}
+
+.pflow-list {
+  display: grid;
+  list-style: none;
+}
+
+.pstep {
+  position: relative;
+  display: grid;
+}
+
+.pstep-marker {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border: 1px solid var(--teal-line);
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: var(--shadow-sm);
+  transition: background 0.3s var(--ease), border-color 0.3s var(--ease), transform 0.3s var(--ease);
+}
+
+.pstep-num {
+  font-family: var(--font-head);
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--teal);
+  transition: color 0.3s var(--ease);
+}
+
+.pstep.is-active .pstep-marker {
+  background: var(--teal);
+  border-color: var(--teal);
+  transform: scale(1.06);
+}
+
+.pstep.is-active .pstep-num {
+  color: #fff;
+}
+
+.pstep-kicker {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--peach-ink);
+}
+
+.pstep-title {
+  margin-top: 4px;
+  font-family: var(--font-head);
+  font-size: clamp(19px, 2.2vw, 24px);
+  font-weight: 600;
+  line-height: 1.22;
+  color: var(--teal);
+}
+
+.pstep-summary {
+  margin-top: 9px;
+  max-width: 68ch;
+  font-size: 15px;
+  line-height: 1.68;
+  color: var(--slate);
+}
+
+.pstep-services {
+  display: grid;
+  gap: 8px;
+  margin-top: 14px;
+  list-style: none;
+}
+
+.pstep-services li {
+  padding: 11px 14px;
+  border-left: 2px solid var(--teal-line);
+  border-radius: var(--radius-sm);
+  background: var(--surface-alt);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.pstep-services strong {
+  display: block;
+  color: var(--charcoal);
+}
+
+.pstep-services span {
+  color: var(--slate);
+}
+
+.pstep-outcome,
+.pstep-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 13px;
+  font-size: 14px;
+}
+
+.pstep-outcome {
+  color: var(--charcoal);
+}
+
+.pstep-outcome .i {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+  color: var(--teal);
+  stroke-width: 3;
+}
+
+.pstep-link {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--teal);
+  text-decoration: none;
+}
+
+.pstep-link .i {
+  width: 14px;
+  height: 14px;
+  transition: transform 0.18s var(--ease);
+}
+
+.pstep-link:hover .i {
+  transform: translateX(3px);
+}
+
+/* vertical: marker column on the left, line running down through it */
+
+.pflow--vertical .pflow-list {
+  gap: clamp(26px, 4vw, 42px);
+}
+
+.pflow--vertical .pstep {
+  grid-template-columns: 46px minmax(0, 1fr);
+  gap: clamp(16px, 2.4vw, 26px);
+  align-items: start;
+}
+
+.pflow--vertical .pflow-track {
+  position: absolute;
+  top: 22px;
+  bottom: 22px;
+  left: 22px;
+  width: 2px;
+  background: var(--line-strong);
+  overflow: hidden;
+}
+
+.pflow--vertical .pflow-fill {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--teal);
+  transform-origin: top;
+  transform: scaleY(var(--progress, 0));
+  transition: transform 0.55s var(--ease-out);
+}
+
+/* horizontal on wide screens: markers in a row, line running across */
+
+@media (min-width: 900px) {
+  .pflow--horizontal .pflow-list {
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(0, 1fr);
+    gap: clamp(18px, 2.4vw, 30px);
+  }
+
+  .pflow--horizontal .pstep {
+    grid-template-rows: 46px auto;
+    gap: 16px;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .pflow--horizontal .pstep-summary {
+    max-width: 34ch;
+  }
+
+  .pflow--horizontal .pflow-track {
+    position: absolute;
+    top: 22px;
+    left: 10%;
+    right: 10%;
+    height: 2px;
+    background: var(--line-strong);
+    overflow: hidden;
+  }
+
+  .pflow--horizontal .pflow-fill {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: var(--teal);
+    transform-origin: left;
+    transform: scaleX(var(--progress, 0));
+    transition: transform 0.55s var(--ease-out);
+  }
+}
+
+/* below 900px a horizontal flow simply becomes the vertical one */
+
+@media (max-width: 899px) {
+  .pflow--horizontal .pflow-list {
+    gap: clamp(24px, 5vw, 34px);
+  }
+
+  .pflow--horizontal .pstep {
+    grid-template-columns: 46px minmax(0, 1fr);
+    gap: 16px;
+    align-items: start;
+  }
+
+  .pflow--horizontal .pflow-track {
+    position: absolute;
+    top: 22px;
+    bottom: 22px;
+    left: 22px;
+    width: 2px;
+    background: var(--line-strong);
+    overflow: hidden;
+  }
+
+  .pflow--horizontal .pflow-fill {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: var(--teal);
+    transform-origin: top;
+    transform: scaleY(var(--progress, 0));
+    transition: transform 0.55s var(--ease-out);
+  }
+}
+
+/* ---------- RequirementMap ---------- */
+
+.rmap-pillars {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(14px, 2vw, 20px);
+  list-style: none;
+}
+
+@media (min-width: 620px) {
+  .rmap-pillars {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1000px) {
+  .rmap-pillars {
+    grid-template-columns: repeat(var(--n, 3), minmax(0, 1fr));
+  }
+}
+
+.rmap-card {
+  height: 100%;
+  padding: clamp(18px, 2.4vw, 24px);
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--teal-line);
+  border-radius: var(--radius);
+  background: #fff;
+  box-shadow: var(--shadow-sm);
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.5s var(--ease-out), transform 0.5s var(--ease-out),
+    border-color 0.3s var(--ease), box-shadow 0.3s var(--ease);
+  transition-delay: calc(var(--i, 0) * 70ms);
+}
+
+.rmap.is-in .rmap-card {
+  opacity: 1;
+  transform: none;
+}
+
+.rmap-card:hover {
+  border-top-color: var(--teal);
+  box-shadow: var(--shadow-md);
+}
+
+.rmap-icon {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--teal);
+}
+
+.rmap-icon .i {
+  width: 22px;
+  height: 22px;
+}
+
+.rmap-title {
+  font-family: var(--font-head);
+  font-size: clamp(17px, 2vw, 20px);
+  font-weight: 600;
+  color: var(--teal);
+}
+
+.rmap-summary {
+  margin-top: 8px;
+  font-size: 14px;
+  line-height: 1.62;
+  color: var(--slate);
+}
+
+/* Connector: a bus spanning pillar-centre to pillar-centre, then one drop
+   into the outcome. The inset is half a column each side, derived from --n,
+   so it lands on the centres for any pillar count with no JS measurement. */
+
+.rmap-join {
+  position: relative;
+  height: 56px;
+}
+
+.rmap-bus,
+.rmap-drop {
+  position: absolute;
+  background: var(--teal-line);
+  opacity: 0;
+  transition: opacity 0.4s var(--ease), transform 0.5s var(--ease-out);
+}
+
+/* A stem from each pillar down to the bus, so the diagram reads as "all of
+   these feed in" rather than one line floating under the row. Drawn off the
+   pillar itself, which is already centred over its own column — no maths. */
+@media (min-width: 1000px) {
+  .rmap-pillar {
+    position: relative;
+  }
+
+  .rmap-pillar::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: calc(50% - 1px);
+    width: 2px;
+    height: 26px;
+    background: var(--teal-line);
+    opacity: 0;
+    transition: opacity 0.35s var(--ease);
+  }
+
+  .rmap.is-in .rmap-pillar::after {
+    opacity: 1;
+    transition-delay: calc(200ms + var(--i, 0) * 60ms);
+  }
+}
+
+.rmap-bus {
+  top: 26px;
+  left: calc(50% / var(--n, 3));
+  right: calc(50% / var(--n, 3));
+  height: 2px;
+  transform: scaleX(0);
+  transform-origin: center;
+}
+
+.rmap-drop {
+  top: 26px;
+  left: calc(50% - 1px);
+  width: 2px;
+  height: 30px;
+  transform: scaleY(0);
+  transform-origin: top;
+}
+
+.rmap.is-in .rmap-bus {
+  opacity: 1;
+  transform: scaleX(1);
+  transition-delay: 260ms;
+}
+
+.rmap.is-in .rmap-drop {
+  opacity: 1;
+  transform: scaleY(1);
+  transition-delay: 620ms;
+}
+
+.rmap-outcome {
+  max-width: 560px;
+  margin-inline: auto;
+  padding: clamp(20px, 3vw, 28px);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(165deg, var(--teal) 0%, var(--teal-deep) 100%);
+  text-align: center;
+  color: #fff;
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.5s var(--ease-out), transform 0.5s var(--ease-out);
+  transition-delay: 720ms;
+}
+
+.rmap.is-in .rmap-outcome {
+  opacity: 1;
+  transform: none;
+}
+
+.rmap-outcome-icon {
+  display: inline-block;
+  margin-bottom: 8px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.rmap-outcome-icon .i {
+  width: 24px;
+  height: 24px;
+}
+
+.rmap-outcome-title {
+  font-family: var(--font-head);
+  font-size: clamp(19px, 2.2vw, 23px);
+  font-weight: 600;
+}
+
+.rmap-outcome-text {
+  margin-top: 7px;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.rmap-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  max-width: 70ch;
+  margin: clamp(20px, 3vw, 28px) auto 0;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--slate);
+}
+
+.rmap-note .i {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+  margin-top: 3px;
+  color: var(--teal);
+}
+
+/* Once the pillars stack, a bus spanning "centre to centre" is meaningless,
+   so drop it and let the outcome follow the list directly. */
+
+@media (max-width: 999px) {
+  .rmap-join {
+    height: 30px;
+  }
+
+  .rmap-bus {
+    display: none;
+  }
+
+  .rmap-drop {
+    top: 0;
+    height: 26px;
+  }
+}
+
+/* ---------- reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .rmap-card,
+  .rmap-outcome,
+  .rmap-bus,
+  .rmap-drop {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Show the connecting line complete rather than animating it in */
+  .pflow-fill {
+    transform: none;
+  }
+}
