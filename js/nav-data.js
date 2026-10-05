@@ -111,6 +111,11 @@ window.CC_NAV = [
     ],
   },
 
+  /* Its own top-level item, no dropdown. It used to sit under Testimonials
+     as /testimonials/results/; it moved out so the charts are one click from
+     anywhere, and the home page stats band links straight to it. */
+  { key: 'results', label: 'Results', href: 'results/index.html' },
+
   {
     key: 'testimonials',
     label: 'Testimonials',
@@ -118,7 +123,6 @@ window.CC_NAV = [
     children: [
       { key: 'testimonials/student-stories', label: 'Student Stories', href: 'testimonials/student-stories/index.html' },
       { key: 'testimonials/parent-reviews', label: 'Parent Reviews', href: 'testimonials/parent-reviews/index.html' },
-      { key: 'testimonials/results', label: 'Results', href: 'testimonials/results/index.html' },
     ],
   },
 

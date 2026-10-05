@@ -60,7 +60,12 @@
         { value: 1000, suffix: '+', label: 'Students guided', sub: 'Since 2019' },
         { value: 60, prefix: '$', suffix: 'M+', label: 'Scholarships & aid', sub: 'Across all cycles' },
         { value: 20, prefix: 'Top ', label: 'Universities', sub: 'US News rankings' },
-      ])
+      ]) +
+        `<p class="stats-footnote">
+           <a class="btn btn-ghost" href="results/index.html">See our full results
+             <svg class="i" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
+           </a>
+         </p>`
     );
 
     /* ---------- admits marquee ----------

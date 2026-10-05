@@ -534,21 +534,15 @@ window.CC_PAGES = {
     ],
   },
 
-  'testimonials/results': {
-    eyebrow: 'Testimonials',
+  /* ===================== RESULTS ===================== */
+
+  results: {
+    eyebrow: 'Our results',
     title: 'Results',
-    subtitle: 'The 2025 cycle in numbers.',
-    blocks: [
-      {
-        type: 'stats',
-        items: [
-          { value: 107, label: 'Total acceptances', sub: '197% growth since 2021' },
-          { value: 23.9, decimals: 1, prefix: '$', suffix: 'M', label: 'Aid & scholarships', sub: '83 students received aid' },
-          { value: 15, label: 'Ivys, Stanford & MIT', sub: 'Elite institutions' },
-          { value: 35, label: 'Top 20 universities', sub: 'US News rankings' },
-        ],
-      },
-    ],
+    subtitle: 'Every cycle since 2021, in numbers.',
+    /* Banner only. Stats, charts and the year-by-year table are drawn by
+       js/page-results.js from js/results-data.js. */
+    blocks: [],
   },
 
   /* ===================== COLLEGE SEEKERS ===================== */

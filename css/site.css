@@ -3120,7 +3120,8 @@ body {
   color: var(--teal);
 }
 
-.work-footnote {
+.work-footnote,
+.stats-footnote {
   margin-top: clamp(30px, 4vw, 44px);
   text-align: center;
 }

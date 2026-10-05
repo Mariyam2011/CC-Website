@@ -45,6 +45,7 @@ programs/                       │  One folder per route, each containing index
 resources/                      │  Every shell is ~30 lines and identical except for
 updates/                        │
 testimonials/                   │
+results/                        │  + its own css/results.css, js/page-results.js
 college-seekers/                │
 journal/                        │
 blog/                           │  + blog/financial-aid-guide/
@@ -97,6 +98,22 @@ listing page.
 The Story Workbook additionally autosaves to `localStorage` (`cc-story-workbook-v1`) and
 lazy-loads jsPDF from CDN on first click of Download PDF — nothing is fetched until then,
 so the page still works offline.
+
+### Results page
+
+`results/` is a top-level nav item with no dropdown, and the home page stats band links to it
+("See our full results"). It keeps its `page-content.js` entry for the banner only (`blocks: []`).
+Everything below it — headline stats, the three trend charts and the year-by-year
+university table — is drawn by `js/page-results.js` into `<div data-results>`, styled by
+`css/results.css`.
+
+**Every number comes from `js/results-data.js`.** To publish a new cycle, append its row to
+`years`, add its university list under `universities`, and take it out of `comingSoon`.
+The growth percentage, axis ranges and "Coming soon" pill all follow from the data.
+
+The charts are inline SVG with no library, so the page still works off disk. They re-draw at
+their real width on resize, have a hover tooltip, are keyboard-readable (focus a chart, then
+use the arrow keys), and carry a visually hidden data table for screen readers.
 
 ---
 
