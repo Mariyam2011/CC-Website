@@ -420,14 +420,27 @@ window.CC_CONTENT = {
   ],
 
   /* ------------------------------------------------------------------------
-     UPCOMING DEADLINES  (typical yearly dates — verify before relying on them)
-     Days-left counts update automatically and roll over to next year.
+     UPCOMING DEADLINES — 2026–27 cycle (autumn 2027 entry)
+     Checked October 2026 against UCAS, College Board, ACT and OUAC.
+     Days-left counts update automatically. An entry with a `year` is an
+     exact date and disappears once it has passed; an entry without one is
+     a recurring date that rolls over to next year.
      ------------------------------------------------------------------------ */
   deadlines: [
-    { label: 'FAFSA & CSS Profile open', month: 10, day: 1, region: 'US' },
-    { label: 'UCAS: Oxford, Cambridge & medicine', month: 10, day: 15, region: 'UK' },
-    { label: 'Early Decision & Early Action (many schools)', month: 11, day: 1, region: 'US' },
-    { label: 'Regular Decision (many schools)', month: 1, day: 1, region: 'US' },
+    { label: 'UCAS: Oxford, Cambridge, medicine, dentistry & vet', month: 10, day: 15, year: 2026, region: 'UK' },
+    { label: 'ACT test date', month: 10, day: 17, year: 2026, region: 'Global' },
+    { label: 'Early Decision & Early Action (many schools)', month: 11, day: 1, year: 2026, region: 'US' },
+    { label: 'SAT test date', month: 11, day: 7, year: 2026, region: 'Global' },
+    { label: 'Early Decision & Early Action (second wave)', month: 11, day: 15, year: 2026, region: 'US' },
+    { label: 'SAT test date (last of 2026)', month: 12, day: 5, year: 2026, region: 'Global' },
+    { label: 'ACT test date', month: 12, day: 12, year: 2026, region: 'Global' },
+    { label: 'Regular Decision (many schools)', month: 1, day: 1, year: 2027, region: 'US' },
+    { label: 'UCAS equal-consideration deadline', month: 1, day: 13, year: 2027, region: 'UK' },
+    { label: 'OUAC: Ontario universities', month: 1, day: 15, year: 2027, region: 'Canada' },
+    { label: 'UCAS: universities aim to send decisions', month: 3, day: 31, year: 2027, region: 'UK' },
+    { label: 'US National Decision Day', month: 5, day: 1, year: 2027, region: 'US' },
+    { label: 'UCAS: reply to offers (most applicants)', month: 5, day: 5, year: 2027, region: 'UK' },
+    { label: 'UCAS: final deadline before Clearing', month: 6, day: 30, year: 2027, region: 'UK' },
   ],
 
   /* ------------------------------------------------------------------------
@@ -445,54 +458,65 @@ window.CC_CONTENT = {
      See assets/students/README.md for sizes and for what to get permission
      for before publishing someone's picture.
      ------------------------------------------------------------------------ */
+  /* The four portraits in the home page hero ("Trusted by students…").
+     Picked separately from the stories so the sharpest photos can lead.
+     Uses the same 600×750 crops as the story cards; remove this list and
+     the row falls back to the first four testimonials. */
+  trustPhotos: [
+    { name: 'Rammal Sheikh', photo: 'assets/students/rammal-sheikh.jpg' },
+    { name: 'Zainab', photo: 'assets/students/zainab.jpg' },
+    { name: 'Areeb Assad', photo: 'assets/students/areeb-assad.jpg' },
+    { name: 'Raya Billa', photo: 'assets/students/raya-billa.jpg' },
+  ],
+
   testimonials: [
     {
-      headline: 'My essays finally sounded like me',
+      headline: 'Duke felt impossible until I realized I had a real chance',
       quote:
-        "College Crafters didn't write my story — they helped me find it. For the first time my essays sounded like me, and every part of my application finally pointed in the same direction.",
-      name: 'Hamza R.',
+        "Applying to universities like Duke can be intimidating, especially when you’re also thinking about the financial side of studying abroad. College Crafters helped me approach the process with a lot more clarity and confidence. They helped me bring my experiences together into an application that genuinely represented who I am, rather than trying to fit me into a formula. Getting admitted to Duke with full financial aid was a moment I’ll always be grateful for, and I don’t think I would have approached the process the same way without their guidance.",
+      name: 'Rammal Sheikh',
       role: 'Student',
       country: 'Pakistan',
-      detail: 'Student · Class of 2025',
-      result: 'Top-20 US university',
+      detail: 'Student · Class of 2025-26',
+      result: 'Duke University · Full Financial Aid',
       accent: '#57068c',
-      photo: '',
+      photo: 'assets/students/rammal-sheikh.jpg',
     },
     {
-      headline: "From “we can't afford that” to comparing offers",
+      headline: 'Dartmouth felt like a dream until it became real',
       quote:
-        "The financial aid guidance changed what was possible for our family. We went from 'we can't afford that school' to comparing scholarship offers.",
-      name: 'Sadia K.',
-      role: 'Parent',
+        "The application process can feel overwhelming when you’re aiming for a university like Dartmouth. What helped me most was having people who understood both the process and what I was trying to achieve. From refining my application to making sure my experiences came through clearly, the guidance made the process much more manageable. Seeing the Dartmouth acceptance — along with the scholarship — was a moment I’ll never forget.",
+      name: 'Haaris Usman Saeed',
+      role: 'Student',
       country: 'Pakistan',
-      detail: 'Parent · Class of 2025',
-      result: 'Full scholarship',
+      detail: 'Student · Class of 2025-26',
+      result: 'Dartmouth College · Full Financial Aid',
       accent: '#0d7377',
-      photo: '',
+      photo: 'assets/students/haaris-usman-saeed.jpg',
     },
     {
-      headline: 'The mock interviews were harder than the real thing',
+      headline: 'My applications finally reflected what I wanted to study',
       quote:
-        'My mock interviews were harder than the real thing. By the time I sat down with my interviewer, I knew exactly what I wanted to say — and why.',
-      name: 'Ali M.',
+        'I had worked hard throughout school, but turning everything I had done into a strong college application was a completely different challenge. College Crafters helped me bring my academics, interests, and experiences together into a clear application. Receiving an acceptance from Dartmouth was incredible, and having multiple options, including NJIT and Rhodes University, made the outcome even more rewarding.',
+      name: 'Areeb Assad',
       role: 'Student',
       country: 'Pakistan',
-      detail: 'Student · Class of 2025',
-      result: 'Ivy League admit',
+      detail: 'Student · Class of 2026',
+      result: 'Dartmouth College · NJIT · Rhodes University · Full Financial Aid',
       accent: '#1d4f91',
-      photo: '',
+      photo: 'assets/students/areeb-assad.jpg',
     },
     {
-      headline: 'A random list of activities became one clear story',
+      headline: 'I stopped wondering whether I was aiming too high',
       quote:
-        'I came in with a random list of activities. I left with a clear narrative, a college list that actually fit me, and a mentor I still message.',
-      name: 'Laiba S.',
+        "Applying to highly selective universities can make you constantly question whether you’re good enough. The guidance I received helped me stop thinking about the process as simply getting into a good college and start thinking about where I would actually thrive. Seeing Columbia and Williams among my acceptances made me realize that the right application can open doors you once thought were out of reach.",
+      name: 'Raya Billa',
       role: 'Student',
-      country: 'United Arab Emirates',
-      detail: 'Student · Class of 2025',
-      result: 'UK & Canada offers',
+      country: 'Pakistan',
+      detail: 'Student · Class of 2025-26',
+      result: 'Columbia University · Williams College · Full Financial Aid',
       accent: '#a85400',
-      photo: '',
+      photo: 'assets/students/raya-billa.jpg',
     },
   ],
 

@@ -179,16 +179,51 @@ window.CC_PAGES = {
   'application-process/timeline': {
     eyebrow: 'The application process',
     title: 'Timeline',
-    subtitle: 'What happens when, across a typical application year.',
+    subtitle:
+      'The 2026–27 cycle, for students starting university in autumn 2027. Dates checked October 2026 — always confirm with each university.',
+    /* Dates from the official sources: UCAS key dates (2027 entry), College
+       Board SAT dates, ACT national test dates, StudentAid.gov (FAFSA) and
+       OUAC. Update each autumn when the next cycle's dates are published. */
     blocks: [
       {
         type: 'steps',
         items: [
-          { icon: 'compass', title: 'Spring', text: 'Discovery, profile review and a first draft of the school list.' },
-          { icon: 'target', title: 'Summer', text: 'Testing, essay brainstorming and the bulk of first drafts.' },
-          { icon: 'edit', title: 'Early autumn', text: 'Essay revisions, recommendations and portal setup.' },
-          { icon: 'send', title: 'Late autumn', text: 'Early deadlines, UCAS submission and aid forms.' },
-          { icon: 'award', title: 'Winter–spring', text: 'Regular deadlines, interviews, decisions and offer comparisons.' },
+          {
+            icon: 'compass',
+            meta: 'August – September 2026',
+            title: 'Applications open',
+            text: 'The Common App and UCAS are open for 2027 entry, and the 2027–28 FAFSA opened on 23 September. Final school list, essay drafts and recommenders confirmed.',
+          },
+          {
+            icon: 'target',
+            meta: 'October 2026',
+            title: 'First deadlines',
+            text: 'CSS Profile opens 1 October. UCAS deadline for Oxford, Cambridge, medicine, dentistry and veterinary courses: 15 October, 6pm UK time. SAT on 3 October, ACT on 17 October.',
+          },
+          {
+            icon: 'edit',
+            meta: 'November – December 2026',
+            title: 'Early Decision & Early Action',
+            text: 'Most ED and EA deadlines fall on 1 or 15 November, with aid forms due alongside. Last autumn test dates: SAT 7 November and 5 December, ACT 12 December. Early results arrive mid-December.',
+          },
+          {
+            icon: 'send',
+            meta: 'January – February 2027',
+            title: 'Regular deadlines',
+            text: 'US Regular Decision deadlines mostly fall 1–15 January. UCAS equal-consideration deadline: 13 January, 6pm UK time. Ontario (OUAC): 15 January. Interviews run through February.',
+          },
+          {
+            icon: 'clock',
+            meta: 'March – April 2027',
+            title: 'Decisions and aid offers',
+            text: 'US decisions and financial aid packages arrive through late March. UK universities aim to decide on January applications by 31 March. Compare full cost of attendance, not just scholarship amounts.',
+          },
+          {
+            icon: 'award',
+            meta: 'May – July 2027',
+            title: 'Commit and prepare',
+            text: 'US Decision Day is 1 May; the UCAS reply deadline is 5 May for most applicants. Final UCAS deadline 30 June, with Clearing opening 2 July. Start the student visa process as soon as you commit.',
+          },
         ],
       },
       { type: 'data', source: 'deadlines' },

@@ -518,10 +518,12 @@
     const now = today();
     const rows = (C.deadlines || [])
       .map((d) => {
-        let date = new Date(now.getFullYear(), d.month - 1, d.day);
-        if (date < now) date = new Date(now.getFullYear() + 1, d.month - 1, d.day);
+        /* `year` pins an exact date that drops off once passed. */
+        let date = new Date(d.year || now.getFullYear(), d.month - 1, d.day);
+        if (!d.year && date < now) date = new Date(now.getFullYear() + 1, d.month - 1, d.day);
         return { ...d, date, days: daysBetween(now, date) };
       })
+      .filter((r) => r.days >= 0)
       .sort((a, b) => a.date - b.date);
 
     fill(

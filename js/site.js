@@ -175,11 +175,17 @@
     const now = new Date();
     const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 
-    const withDays = items.map((d) => {
-      let when = new Date(today.getFullYear(), d.month - 1, d.day);
-      if (when < today) when = new Date(today.getFullYear() + 1, d.month - 1, d.day);
-      return { ...d, when, days: Math.round((when - today) / 86400000) };
-    });
+    /* `year` pins an exact date that drops off once passed; without it the
+       date recurs and rolls over to next year. */
+    const withDays = items
+      .map((d) => {
+        let when = new Date(d.year || today.getFullYear(), d.month - 1, d.day);
+        if (!d.year && when < today) when = new Date(today.getFullYear() + 1, d.month - 1, d.day);
+        return { ...d, when, days: Math.round((when - today) / 86400000) };
+      })
+      .filter((d) => d.days >= 0);
+
+    if (!withDays.length) return CC.Placeholder('No upcoming deadlines yet. Next cycle’s dates are on the way.');
 
     withDays.sort((a, b) => a.days - b.days);
 
@@ -273,14 +279,16 @@
 
     const count = (role) => items.filter((t) => !role || storyRole(t) === role).length;
 
-    const tab = (key, label) => {
+    /* `always` keeps a tab visible with a zero count, so Parent Reviews has
+       a home before the first review is added. */
+    const tab = (key, label, always) => {
       const n = count(key === 'all' ? '' : key);
-      if (!n) return '';
+      if (!n && !always) return '';
       return `<button class="filter" type="button" role="tab" aria-pressed="${key === 'all'}"
                 data-story-filter="${esc(key)}">${esc(label)} <span class="n">${n}</span></button>`;
     };
 
-    const tabs = [tab('all', 'All stories'), tab('Student', 'Students'), tab('Parent', 'Parents')]
+    const tabs = [tab('all', 'All stories'), tab('Student', 'Students'), tab('Parent', 'Parent Reviews', true)]
       .filter(Boolean)
       .join('');
 
@@ -331,7 +339,11 @@
           c.hidden = false;
         });
 
-        if (empty) empty.hidden = list.length > 0;
+        if (empty) {
+          empty.hidden = list.length > 0;
+          empty.textContent =
+            filter === 'Parent' ? 'Parent reviews are coming soon.' : 'No stories in this category yet.';
+        }
         if (moreWrap) moreWrap.hidden = list.length <= shown;
         if (status) {
           const n = Math.min(shown, list.length);

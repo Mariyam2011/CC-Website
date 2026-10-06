@@ -34,13 +34,19 @@
 
     /* ---------- hero trust row ---------- */
 
-    const people = (content.testimonials || []).slice(0, 4);
+    /* The student's portrait sits over their initials, so a photo that fails
+       to load (onerror removes it) falls back to the coloured initials dot. */
+    const people = (content.trustPhotos || content.testimonials || []).slice(0, 4);
     const dots = people
       .map(
         (p, i) =>
           `<span class="trust-dot${i % 2 ? ' trust-dot--peach' : ''}" aria-hidden="true">${esc(
             initials(p.name)
-          )}</span>`
+          )}${
+            p.photo
+              ? `<img class="trust-dot-img" src="${esc(CC.url(p.photo))}" alt="" loading="lazy" onerror="this.remove()" />`
+              : ''
+          }</span>`
       )
       .join('');
 

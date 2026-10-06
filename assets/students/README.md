@@ -22,11 +22,11 @@ invisible on the page — check here if a photo you added is not appearing.
 
 ## File requirements
 
-- **Landscape, roughly 16:10.** Cards crop to that with `object-fit: cover`,
-  so a portrait-orientation phone photo will crop hard top and bottom. The
-  featured card at the top of the page crops taller, so keep the subject
-  near the centre.
-- **About 800×500px** is plenty. The card never renders wider than ~560px.
+- **Portrait, 4:5, exported at 600×750px.** Keep every photo at this same
+  size so the cards match. The card shows the photo in a narrow column on
+  wider screens and as a wide 2:1 strip on phones, both with
+  `object-fit: cover` biased toward the upper third — so crop with the face
+  around the middle of the frame and the eyes a little above centre.
 - **JPEG** for photographs, compressed to roughly 100–200KB.
 - Faces should sit slightly above centre. The featured card is taller than
   the grid cards, and a centred crop reads better in both.

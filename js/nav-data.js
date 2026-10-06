@@ -116,15 +116,9 @@ window.CC_NAV = [
      anywhere, and the home page stats band links straight to it. */
   { key: 'results', label: 'Results', href: 'results/index.html' },
 
-  {
-    key: 'testimonials',
-    label: 'Testimonials',
-    href: 'testimonials/index.html',
-    children: [
-      { key: 'testimonials/student-stories', label: 'Student Stories', href: 'testimonials/student-stories/index.html' },
-      { key: 'testimonials/parent-reviews', label: 'Parent Reviews', href: 'testimonials/parent-reviews/index.html' },
-    ],
-  },
+  /* No dropdown: students and parents share one page, switched by the
+     filter tabs above the stories. */
+  { key: 'testimonials', label: 'Stories', href: 'testimonials/index.html' },
 
   /* College Seekers is no longer a top-level item — it sits under Programs
      and opens in a new tab. Its Undergraduate and Graduate pages are reached
@@ -167,7 +161,7 @@ window.CC_FOOTER = {
       title: 'Company',
       links: [
         { label: 'Team', href: 'team/index.html' },
-        { label: 'Testimonials', href: 'testimonials/index.html' },
+        { label: 'Stories', href: 'testimonials/index.html' },
         { label: 'Contact', booking: true },
       ],
     },

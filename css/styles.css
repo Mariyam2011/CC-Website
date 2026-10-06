@@ -445,13 +445,19 @@ a:hover .link-arrow .i,
   text-align: center;
   min-height: clamp(500px, calc(88vh - 76px), 760px);
   padding: clamp(56px, 9vw, 92px) clamp(20px, 5vw, 40px);
-  overflow: hidden;
+  /* Clip sideways only. Clipping vertically too cut off the booking dropdown
+     where it hangs past the bottom of a short page hero; z-index keeps that
+     dropdown above the section that follows. */
+  overflow-x: clip;
+  overflow-y: visible;
+  z-index: 1;
   background: #fff;
 }
 
 .hero-art {
   position: absolute;
   inset: 0;
+  overflow: hidden;
   z-index: -1;
   pointer-events: none;
   opacity: 0.06;
@@ -561,6 +567,12 @@ a:hover .link-arrow .i,
   gap: clamp(12px, 2vw, 16px);
   margin-top: clamp(36px, 5vw, 48px);
   width: 100%;
+  /* The fadeUp animation (fill: both) leaves a transform on this row and on
+     the trust row below it, so each becomes its own stacking context and the
+     later one paints on top. Lifting this row keeps the Book a meeting
+     dropdown above the trust row's photos and text. */
+  position: relative;
+  z-index: 2;
 }
 
 .hero-proof {

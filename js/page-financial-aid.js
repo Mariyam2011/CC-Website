@@ -234,7 +234,7 @@
 
   const TIMELINE = [
     { icon: 'compass', meta: 'June – August 2026', title: 'Research and list building', text: 'Identify target schools based on aid policies. Run net price calculators. Start gathering financial documents.' },
-    { icon: 'file', meta: 'September – October 2026', title: 'Applications open', text: 'Common App and Coalition App go live. CSS Profile opens October 1. Begin filling out applications and aid forms simultaneously.' },
+    { icon: 'file', meta: 'September – October 2026', title: 'Applications open', text: 'Common App and Coalition App go live. The 2027–28 FAFSA opened September 23 and the CSS Profile opens October 1. Begin filling out applications and aid forms simultaneously.' },
     { icon: 'edit', meta: 'November 1–15, 2026', title: 'Early Decision / Early Action deadlines', text: 'Most ED deadlines fall here. Financial aid forms due on the same date or within two weeks.' },
     { icon: 'send', meta: 'January 1 – February 1, 2027', title: 'Regular Decision deadlines', text: 'Most RD applications and financial aid forms due. CSS Profile, ISFAA, and all university-specific forms must be submitted.' },
     { icon: 'clock', meta: 'March – April 2027', title: 'Decisions and aid offers arrive', text: 'Compare financial aid packages carefully. Look at total cost of attendance, not just the scholarship amount.' },
