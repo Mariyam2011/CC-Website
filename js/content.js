@@ -74,7 +74,7 @@ window.CC_CONTENT = {
     {
       name: 'Yasir Iqbal',
       credential: 'New Jersey Institute of Technology',
-      role: 'Co-Founder, Technology & Operations',
+      role: 'Co-Founder & Chief Operating Officer (COO)',
       photo: 'assets/team/yasir.jpg',
     },
     {
@@ -111,7 +111,7 @@ window.CC_CONTENT = {
       name: 'Zul',
       credential: 'MBA, Harvard',
       role: 'Director, Operations',
-      photo: 'assets/team/zul.jpg',
+      photo: '',
     },
     {
       name: 'Ibrahim',
