@@ -465,8 +465,8 @@ window.CC_CONTENT = {
   trustPhotos: [
     { name: 'Rammal Sheikh', photo: 'assets/students/rammal-sheikh.jpg' },
     { name: 'Zainab', photo: 'assets/students/zainab.jpg' },
-    { name: 'Areeb Assad', photo: 'assets/students/areeb-assad.jpg' },
-    { name: 'Raya Billa', photo: 'assets/students/raya-billa.jpg' },
+    { name: 'Zahid Zaidi', photo: 'assets/students/zahid-zaidi.jpg' },
+    { name: 'Raiha Bilal', photo: 'assets/students/raiha-bilal.jpg' },
   ],
 
   testimonials: [
@@ -495,28 +495,40 @@ window.CC_CONTENT = {
       photo: 'assets/students/haaris-usman-saeed.jpg',
     },
     {
+      headline: 'I finally knew how to tell my story',
+      quote:
+        'I came into the college application process during a gap year knowing I wanted to apply to the US, but I wasn’t sure how to make my application tell a coherent story. College Crafters helped me work through my Common App from the ground up and, most importantly, helped me understand how to present my experiences in a way that actually felt like me. By the end, I had a much clearer sense of my story and the kind of universities that were right for me. Seeing my acceptances from Vanderbilt, the University of Pennsylvania, and Colby made the whole journey worth it.',
+      name: 'Zahid Zaidi',
+      role: 'Student',
+      country: 'Pakistan',
+      detail: 'Student · Gap Year · Class of 2025-26',
+      result: 'Vanderbilt University · University of Pennsylvania · Colby College',
+      accent: '#1d4f91',
+      photo: 'assets/students/zahid-zaidi.jpg',
+    },
+    {
+      headline: 'I stopped wondering whether I was aiming too high',
+      quote:
+        "Applying to highly selective universities can make you constantly question whether you’re good enough. The guidance I received helped me stop thinking about the process as simply getting into a good college and start thinking about where I would actually thrive. Seeing Columbia and Williams among my acceptances made me realize that the right application can open doors you once thought were out of reach.",
+      name: 'Raiha Bilal',
+      role: 'Student',
+      country: 'Pakistan',
+      detail: 'Student · Class of 2025-26',
+      result: 'Columbia University · Williams College · Full Financial Aid',
+      accent: '#a85400',
+      photo: 'assets/students/raiha-bilal.jpg',
+    },
+    {
       headline: 'My applications finally reflected what I wanted to study',
       quote:
         'I had worked hard throughout school, but turning everything I had done into a strong college application was a completely different challenge. College Crafters helped me bring my academics, interests, and experiences together into a clear application. Receiving an acceptance from Dartmouth was incredible, and having multiple options, including NJIT and Rhodes University, made the outcome even more rewarding.',
       name: 'Areeb Assad',
       role: 'Student',
       country: 'Pakistan',
-      detail: 'Student · Class of 2026',
-      result: 'Dartmouth College · NJIT · Rhodes University · Full Financial Aid',
-      accent: '#1d4f91',
-      photo: 'assets/students/areeb-assad.jpg',
-    },
-    {
-      headline: 'I stopped wondering whether I was aiming too high',
-      quote:
-        "Applying to highly selective universities can make you constantly question whether you’re good enough. The guidance I received helped me stop thinking about the process as simply getting into a good college and start thinking about where I would actually thrive. Seeing Columbia and Williams among my acceptances made me realize that the right application can open doors you once thought were out of reach.",
-      name: 'Raya Billa',
-      role: 'Student',
-      country: 'Pakistan',
       detail: 'Student · Class of 2025-26',
-      result: 'Columbia University · Williams College · Full Financial Aid',
-      accent: '#a85400',
-      photo: 'assets/students/raya-billa.jpg',
+      result: 'Dartmouth College · NJIT · Rhodes University · Full Financial Aid',
+      accent: '#2f6f4f',
+      photo: '',
     },
   ],
 
